@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!--
+Program name: hw3.html
+Author: Mark Blanchard 1791151
+Date created: 10/28/24
+Date last edited: 11/9/24
+Version: 3.546
+Description: Homework 3 medical input form-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 3 Form</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./hw3js.js"></script>
+</head>
+<h2><img src="./Gulf-Coast-Blood-Cener.png" alt="Blood Bank Logo" width="25%" height="25%">
+    <br> GCRBC Bloodbank Forms</h2>
+<span2> Today's date is: 
+    <script> document.write(new Date().toLocaleDateString()); </script>
+<br> <br>
+ Please fill out the following form before donating blood, thank you!
+</span2>
+
+<h2>User Registration Form</h2>
+<span2> Fields marked with * are required</span2>
+<form id="userForm" onsubmit="./Thankyou.html">
+     
+    <table>
+        <tr>
+            <td><label for="fname">*First Name:</label></td>
+            <td><input type="text" id="fname" name="fname" maxlength="30" required oninput="validateName()" title="1-30 characters, letters, apostrophes and dashes only"></td>
+            <td><span id="fnameError" class="error-message"></span></td>
+        </tr>
+        <tr>
+            <td><label for="mname">Middle Initial:</label></td>
+            <td><input type="text" id="mname" name="mname" maxlength="1" oninput="validateMiddleInitial()" title="1 letter, optional"></td>
+            <td><span id="mnameError" class="error-message"></span></td>
+        </tr>
+        <tr>
+            <td><label for="lname">*Last Name:</label></td>
+            <td><input type="text" id="lname" name="lname" maxlength="30" required oninput="validateLastName()" title="1-30 characters, letters, apostrophes, dashes only"></td>
+            <td><span id="lnameError" class="error-message"></span></td>
+        </tr>
+        <tr>
+            <td><label for="DOB">*Date of Birth:</label></td>
+            <td><input type="date" id="DOB" name="DOB" required oninput="validateDOB()" title="Date cannot be in the future or more than 120 years ago"></td>
+            <td><span id="DOBError" class="error-message"></span></td>
+        </tr>
+        <tr>
+            <td><label for="Gender">Gender:</label></td>
+            <td>
+                <input type="radio" id="Gender" name="Gender" value="Male"> Male
+                <input type="radio" id="Gender" name="Gender" value="Female"> Female
+                <input type="radio" id="Gender" name="Gender" value="Other"> Other
+                <input type="text" id="specifyGender" name="specifyGender" placeholder="Please specify" maxlength="10">
+            </td>
+        </tr>
+
+        <tr>
+            <td> Please select a blood type:</td>
+<td><input type="radio" id="Blood_A+" name="Blood" value="A+">
+<label for="Blood_A+">A+</label>
+
+<input type="radio" id="Blood_A-" name="Blood" value="A-">
+<label for="Blood_A-">A-</label>
+
+<input type="radio" id="Blood_B+" name="Blood" value="B+">
+<label for="Blood_B+">B+</label>
+
+<input type="radio" id="Blood_B-" name="Blood" value="B-">
+<label for="Blood_B-">B-</label>
+
+<input type="radio" id="Blood_AB+" name="Blood" value="AB+">
+<label for="Blood_AB+">AB+</label>
+
+<input type="radio" id="Blood_AB-" name="Blood" value="AB-">
+<label for="Blood_AB-">AB-</label>
+
+<input type="radio" id="Blood_O+" name="Blood" value="O+">
+<label for="Blood_O+">O+</label>
+
+<input type="radio" id="Blood_O-" name="Blood" value="O-">
+<label for="Blood_O-">O-</label>
+
+<input type="radio" id="Blood_Unsure" name="Blood" value="Unsure" checked>
+<label for="Blood_Unsure">Unsure of blood type</label>
+</td>
+
+        <tr>
+            <td><label for="SSN">*Social Security:</label></td>
+            <td><input type="password" id="SSN" name="SSN" maxlength="11" required oninput="formatAndValidateSSN()" title="9 digits, format as ###-##-####"></td>
+            <td><span id="SSNError" class="error-message"></span></td>
+        </tr>
+        <tr>
+            <td><label for="Address">*Address Line 1:</label></td>
+            <td><input type="text" id="Address" name="Address" maxlength="30" required oninput="validateAddress()" title="2-30 characters"></td>
+            <td><span id="AddressError" class="error-message"></span></td>
+        </tr>
+        <tr>
+            <td><label for="Address2">Address Line 2:</label></td>
+            <td><input type="text" id="Address2" name="Address2" maxlength="30" oninput="validateAddress2()" title="Optional, 2-30 characters"></td>
+            <td><span id="Address2Error" class="error-message"></span></td>
+        </tr>
+        <tr>
+            <td><label for="City">*City:</label></td>
+            <td><input type="text" id="City" name="City" maxlength="30" required oninput="validateCity()" title="2-30 characters"></td>
+            <td><span id="CityError" class="error-message"></span></td>
+        </tr>
+        <tr>
+            <td><label for="State">*State:</label></td>
+            <td>
+                <select id="State" name="State" required oninput="validateState()">
+                    <option value="">Select</option>
+                    <option value="AL">AL</option> <option value="AK">AK</option><option value="AR">AR</option> <option value="AZ">AZ</option> <option value="CA">CA</option>	<option value="CO">CO</option> <option value="CT">CT</option> <option value="DC">DC</option>	<option value="DE">DE</option> <option value="FL">FL</option>	<option value="GA">GA</option> <option value="HI">HI</option>	<option value="IA">IA</option> <option value="ID">ID</option>	<option value="IL">IL</option> <option value="IN">IN</option> <option value="KS">KS</option>	<option value="KY">KY</option> <option value="LA">LA</option> <option value="MA">MA</option>	<option value="MD">MD</option> <option value="ME">ME</option>	<option value="MI">MI</option> <option value="MN">MN</option> <option value="MO">MO</option> <option value="MS">MS</option>	<option value="MT">MT</option>	<option value="NC">NC</option>	<option value="NE">NE</option>	<option value="NH">NH</option>	<option value="NJ">NJ</option> <option value="NM">NM</option>	<option value="NV">NV</option>	<option value="NY">NY</option>	<option value="ND">ND</option> <option value="OH">OH</option>	<option value="OK">OK</option> <option value="OR">OR</option> <option value="PA">PA</option> <option value="RI">RI</option> <option value="SC">SC</option> <option value="SD">SD</option> <option value="TN">TN</option> <option value="TX">TX</option> <option value="UT">UT</option> <option value="VT">VT</option> <option value="VA">VA</option> <option value="WA">WA</option> <option value="WI">WI</option> <option value="WV">WV</option> <option value="WY">WY</option>
+                </select>
+            </td>
+            <td><span id="StateError" class="error-message"></span></td>
+        </tr>
+        <tr>
+            <td><label for="Zip">*Zip Code:</label></td>
+            <td><input type="text" id="Zip" name="Zip" maxlength="10" required oninput="validateZip()" title="5 or 9 digits in ZIP+4 format"></td>
+            <td><span id="ZipError" class="error-message"></span></td>
+        </tr>
+        <tr>
+            <td><label for="email">*Email:</label></td>
+            <td><input type="email" id="email" name="email" required oninput="validateEmail()" title="Format: name@domain.tld"></td>
+            <td><span id="emailError" class="error-message"></span></td>
+        </tr>
+        <tr>
+            <td><label for="Username">*Username:</label></td>
+            <td><input type="text" id="Username" name="Username" maxlength="20" required oninput="validateUsername()" title="5-20 characters, no special characters, cannot start with a number"></td>
+            <td><span id="UsernameError" class="error-message"></span></td>
+        </tr>
+        <tr>
+            <td><label for="Password">*Password:</label></td>
+            <td> <input type="password" id="Password" name="Password" maxlength="30" oninput="validatePasswordOnInput()"></td>
+            <td> <div id="passwordFeedback"></div></td>
+        </tr>
+        <tr>
+            <td><label for="ConfirmPassword">Confirm Password:</label></td>
+            <td> <input type="password" id="ConfirmPassword" name="ConfirmPassword" maxlength="30" oninput="validatePasswordOnInput()"></td>
+            <td> <div id="confirmPasswordFeedback"></div></td>
+        </tr>
+        
+    </table>
+    <!-- Checkboxes -->
+    <div>
+     <label for="symptom1""> Have you had any of the following?</label><br>
+    <input type="checkbox" id="symptom1" name="symptom1" value="Chicken Pox">
+    <label for="symptom1""> Chicken Pox</label><br>
+    <input type="checkbox" id="symptom2" name="symptom2" value="Covid">
+    <label for="symptom2""> Measles</label><br>
+    <input type="checkbox" id="symptom3" name="symptom3" value="Measles">
+    <label for="symptom3""> Covid-19</label><br>
+    <input type="checkbox" id="symptom4" name="symptom4" value="Small Pox">
+    <label for="symptom4""> Small Pox</label><br>
+    <input type="checkbox" id="symptom5" name="symptom5" value="Tetanus">
+    <label for="symptom5""> Tetanus</label><br>
+    <input type="checkbox" id="symptom6" name="symptom6" value="Shingles">
+    <label for="symptom6""> Shingles</label><br>
+    </div>
+    
+    <!-- Slider -->
+    <label for="Range">How much pain are you in?</label>
+    <input type="range" id="Range" value = "0" min="0" max="10" step="1" oninput="showSliderValue(this.value)">
+    <span2 id="sliderValueDisplay"> 0</span2>
+    <br>
+    <span2 id="painError"> Do not give blood if you are in pain.</span2> 
+    <br>
+
+    <!-- Text area for any extra info-->
+    <label for="symptoms">Review of Symptoms:</label><br>
+    <textarea id="symptoms" name="symptoms" rows="4" cols="50"></textarea><br>
+
+    <!-- Validation button -->
+    <button type="button" onclick="validateAllFields()">Validate</button>
+    <button type="button" id="submitButton" style="display:none" onclick="submitForm()">Submit</button>
+</form>
+</body>
+<iframe src='footer.html' width='150px' height='50px' onclick="foot()"></iframe>
+</html>
