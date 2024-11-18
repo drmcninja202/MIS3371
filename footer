@@ -1,0 +1,19 @@
+ <!--
+Program name: footer.html
+Author: Mark Blanchard 1791151
+Date created: 9/3/24
+Date last edited: 11/17/24
+Version: 1.2
+Description: Homework 3 medical input form-->
+<!DOCTYPE HTML>
+ <link rel="stylesheet" href="styles.css">
+    <script src="hw3js.js" defer></script>
+ <html>
+    <body>
+        <span> 
+            <img src="./Gulf-Coast-Blood-Cener.png" alt="Blood Bank Logo" width="15%" height="15%" onclick="foot()">
+            <a href="https://www.google.com/search?q=gulf+coast+regional+blood+center"> Visit us!
+                        <img src="./Gulf-Coast-Blood-Cener.png" alt="Blood Bank Logo" width="15%" height="15%" onclick="foot()">
+        </span>
+    </body>
+ </html>
