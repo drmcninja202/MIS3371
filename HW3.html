@@ -3,7 +3,7 @@
 Program name: hw3.html
 Author: Mark Blanchard 1791151
 Date created: 10/28/24
-Date last edited: 11/9/24
+Date last edited: 12/2/24
 Version: 3.546
 Description: Homework 3 medical input form-->
 <html lang="en">
@@ -13,41 +13,72 @@ Description: Homework 3 medical input form-->
     <title>Homework 3 Form</title>
     <link rel="stylesheet" href="./styles.css">
     <script src="./hw3js.js"></script>
-</head>
-<h2><img src="./Gulf-Coast-Blood-Cener.png" alt="Blood Bank Logo" width="25%" height="25%">
-    <br> GCRBC Bloodbank Forms</h2>
-<span2> Today's date is: 
-    <script> document.write(new Date().toLocaleDateString()); </script>
-<br> <br>
- Please fill out the following form before donating blood, thank you!
-</span2>
+    <script>
+        // Check for the first name cookie
+        window.onload = function() {
+            const firstName = getCookie("firstName");
+            const heading = document.getElementById("welcomeHeading");
+            if (firstName) {
+                heading.innerHTML = `Welcome back, ${firstName}`;
+                document.getElementById("fname").value = firstName;
+                document.getElementById("newUserCheckbox").style.display = "block";
+            } else {
+                heading.innerHTML = "Welcome New User";
+            }
+        };
 
-<h2>User Registration Form</h2>
-<span2> Fields marked with * are required</span2>
-<form id="userForm" onsubmit="./Thankyou.html">
-     
-    <table>
-        <tr>
-            <td><label for="fname">*First Name:</label></td>
-            <td><input type="text" id="fname" name="fname" maxlength="30" required oninput="validateName()" title="1-30 characters, letters, apostrophes and dashes only"></td>
-            <td><span id="fnameError" class="error-message"></span></td>
-        </tr>
-        <tr>
-            <td><label for="mname">Middle Initial:</label></td>
-            <td><input type="text" id="mname" name="mname" maxlength="1" oninput="validateMiddleInitial()" title="1 letter, optional"></td>
-            <td><span id="mnameError" class="error-message"></span></td>
-        </tr>
-        <tr>
-            <td><label for="lname">*Last Name:</label></td>
-            <td><input type="text" id="lname" name="lname" maxlength="30" required oninput="validateLastName()" title="1-30 characters, letters, apostrophes, dashes only"></td>
-            <td><span id="lnameError" class="error-message"></span></td>
-        </tr>
-        <tr>
-            <td><label for="DOB">*Date of Birth:</label></td>
-            <td><input type="date" id="DOB" name="DOB" required oninput="validateDOB()" title="Date cannot be in the future or more than 120 years ago"></td>
-            <td><span id="DOBError" class="error-message"></span></td>
-        </tr>
-        <tr>
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        function deleteCookie(name) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+    </script>
+</head>
+<body>
+    <header class="fixed-header">
+        <h2 id="welcomeHeading"></h2>
+        <input type="checkbox" id="newUserCheckbox" style="display:none" onclick="deleteCookie('firstName'); location.reload();"> Not you? Start as a new user.
+    </header>
+    
+    <main>
+        <h2><img src="./Gulf-Coast-Blood-Cener.png" alt="Blood Bank Logo" width="25%" height="25%">
+            <br> GCRBC Bloodbank Forms</h2>
+        <span> Today's date is: 
+            <script> document.write(new Date().toLocaleDateString()); </script>
+        <br> <br>
+         Please fill out the following form before donating blood, thank you!
+        </span>
+
+        <h2>User Registration Form</h2>
+        <span> Fields marked with * are required</span>
+        <form id="userForm" onsubmit="submitForm(); return false;">
+             
+            <table>
+                <tr>
+                    <td><label for="fname">*First Name:</label></td>
+                    <td><input type="text" id="fname" name="fname" maxlength="30" required oninput="validateName()" title="1-30 characters, letters, apostrophes and dashes only"></td>
+                    <td><span id="fnameError" class="error-message"></span></td>
+                </tr>
+                <tr>
+                    <td><label for="mname">Middle Initial:</label></td>
+                    <td><input type="text" id="mname" name="mname" maxlength="1" oninput="validateMiddleInitial()" title="1 letter, optional"></td>
+                    <td><span id="mnameError" class="error-message"></span></td>
+                </tr>
+                <tr>
+                    <td><label for="lname">*Last Name:</label></td>
+                    <td><input type="text" id="lname" name="lname" maxlength="30" required oninput="validateLastName()" title="1-30 characters, letters, apostrophes, dashes only"></td>
+                    <td><span id="lnameError" class="error-message"></span></td>
+                </tr>
+                <tr>
+                    <td><label for="DOB">*Date of Birth:</label></td>
+                    <td><input type="date" id="DOB" name="DOB" required oninput="validateDOB()" title="Date cannot be in the future or more than 120 years ago"></td>
+                    <td><span id="DOBError" class="error-message"></span></td>
+                </tr>
+                <tr>
             <td><label for="Gender">Gender:</label></td>
             <td>
                 <input type="radio" id="Gender" name="Gender" value="Male"> Male
@@ -180,11 +211,25 @@ Description: Homework 3 medical input form-->
     <!-- Text area for any extra info-->
     <label for="symptoms">Review of Symptoms:</label><br>
     <textarea id="symptoms" name="symptoms" rows="4" cols="50"></textarea><br>
-
-    <!-- Validation button -->
+                <tr>
+                    <td><label for="rememberMe">Remember Me:</label></td>
+                    <td><input type="checkbox" id="rememberMe" name="rememberMe" checked></td>
+                </tr>
+            
+            <!-- Validation button -->
     <button type="button" onclick="validateAllFields()">Validate</button>
     <button type="button" id="submitButton" style="display:none" onclick="submitForm()">Submit</button>
-</form>
+        </table>
+        </form>
+    </main>
+
+    <footer class="fixed-footer">
+        <span> 
+            <img src="./Gulf-Coast-Blood-Cener.png" alt="Blood Bank Logo" width="15%" height="15%" onclick="foot()">
+            <a href="https://www.google.com/search?q=gulf+coast+regional+blood+center"> Visit us!
+            <iframe src="https://www.google.com/search?q=gulf+coast+regional+blood+center" style="width:10%; height:100px;"></iframe>
+                        <img src="./Gulf-Coast-Blood-Cener.png" alt="Blood Bank Logo" width="15%" height="15%" onclick="foot()">
+        </span>
+    </footer>
 </body>
-<iframe src='footer.html' width='150px' height='50px' onclick="foot()"></iframe>
 </html>
