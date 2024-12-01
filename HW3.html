@@ -212,24 +212,28 @@ Description: Homework 3 medical input form-->
     <label for="symptoms">Review of Symptoms:</label><br>
     <textarea id="symptoms" name="symptoms" rows="4" cols="50"></textarea><br>
                 <tr>
+                    
                     <td><label for="rememberMe">Remember Me:</label></td>
                     <td><input type="checkbox" id="rememberMe" name="rememberMe" checked></td>
+                    <br>
                 </tr>
             
             <!-- Validation button -->
     <button type="button" onclick="validateAllFields()">Validate</button>
-    <button type="button" id="submitButton" style="display:none" onclick="submitForm()">Submit</button>
+    <button type="submit">Submit</button>
         </table>
         </form>
     </main>
 
-    <footer class="fixed-footer">
+   <footer class="fixed-footer">
         <span> 
-            <img src="./Gulf-Coast-Blood-Cener.png" alt="Blood Bank Logo" width="15%" height="15%" onclick="foot()">
+            <img src="./Gulf-Coast-Blood-Cener.png" alt="Blood Bank Logo" width="10%" height="10%" onclick="foot()">
             <a href="https://www.google.com/search?q=gulf+coast+regional+blood+center"> Visit us!
-            <iframe src="https://www.google.com/search?q=gulf+coast+regional+blood+center" style="width:10%; height:100px;"></iframe>
-                        <img src="./Gulf-Coast-Blood-Cener.png" alt="Blood Bank Logo" width="15%" height="15%" onclick="foot()">
+            <iframe src="https://www.google.com/search?q=gulf+coast+regional+blood+center" style="width:10%; height:50px;"></iframe>
+                        <img src="./Gulf-Coast-Blood-Cener.png" alt="Blood Bank Logo" width="10%" height="10%" onclick="foot()">
         </span>
     </footer>
+    <!-- I hate this but my footer was covering parts of the form and this fixed that issue so whatever-->
+    <br><br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>
