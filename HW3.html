@@ -4,7 +4,7 @@ Program name: hw3.html
 Author: Mark Blanchard 1791151
 Date created: 10/28/24
 Date last edited: 11/9/24
-Version: 3.547
+Version: 3.546
 Description: Homework 3 medical input form-->
 <html lang="en">
 <head>
@@ -12,7 +12,7 @@ Description: Homework 3 medical input form-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homework 3 Form</title>
     <link rel="stylesheet" href="./styles.css">
-    <script src="./HW3JS.js"></script>
+    <script src="./hw3js.js"></script>
 </head>
 <h2><img src="./Gulf-Coast-Blood-Cener.png" alt="Blood Bank Logo" width="25%" height="25%">
     <br> GCRBC Bloodbank Forms</h2>
@@ -24,7 +24,7 @@ Description: Homework 3 medical input form-->
 
 <h2>User Registration Form</h2>
 <span2> Fields marked with * are required</span2>
-<form id="userForm" onsubmit="MIS3371/Thankyou.html">
+<form id="userForm" onsubmit="./Thankyou.html">
      
     <table>
         <tr>
@@ -133,15 +133,23 @@ Description: Homework 3 medical input form-->
             <td><span id="UsernameError" class="error-message"></span></td>
         </tr>
         <tr>
-            <td><label for="Password">*Password:</label></td>
-            <td> <input type="password" id="Password" name="Password" maxlength="30" oninput="validatePasswordOnInput()"></td>
-            <td> <div id="passwordFeedback"></div></td>
-        </tr>
-        <tr>
-            <td><label for="ConfirmPassword">Confirm Password:</label></td>
-            <td> <input type="password" id="ConfirmPassword" name="ConfirmPassword" maxlength="30" oninput="validatePasswordOnInput()"></td>
-            <td> <div id="confirmPasswordFeedback"></div></td>
-        </tr>
+    <td><label for="Password">Password:</label></td>
+    <td>
+        <input type="password" id="Password" name="Password" maxlength="30" oninput="validatePasswordOnInput()" required>
+    </td>
+    <td>
+        <div id="passwordFeedback" class="validation-feedback"></div>
+    </td>
+</tr>
+<tr>
+    <td><label for="ConfirmPassword">Confirm Password:</label></td>
+    <td>
+        <input type="password" id="ConfirmPassword" name="ConfirmPassword" maxlength="30" oninput="validatePasswordOnInput()" required>
+    </td>
+    <td>
+        <div id="confirmPasswordFeedback" class="validation-feedback"></div>
+    </td>
+</tr>
         
     </table>
     <!-- Checkboxes -->
