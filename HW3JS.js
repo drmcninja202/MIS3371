@@ -1,10 +1,3 @@
-// Program name: HW3JS.js
-// Author: Mark Blanchard 1791151
-// Date created: 11/3/24
-// Date last edited: 11/17/24
-// Version: 2.55
-// Description: Homework 3 medical input form
-
 // Utility function to show error messages
 function showError(fieldId, message) {
     document.getElementById(`${fieldId}Error`).textContent = message;
@@ -161,7 +154,7 @@ function validateUsername() {
     }
     return valid;
 }
-// Function to validate the password as the user types
+
 function validatePasswordOnInput() {
     const password = document.getElementById('Password').value;
     const confirmPassword = document.getElementById('ConfirmPassword').value;
@@ -176,7 +169,7 @@ function validatePasswordOnInput() {
     const specialCharValid = /[!@#%^&*()_+]/.test(password);
 
     // Generate feedback
-    let feedbackMessage = '<ul>';
+    let feedbackMessage = '<ul style="padding-left: 20px; margin: 0;">';
     feedbackMessage += `<li>${lengthValid ? '✅' : '❌'} Password length (8-30 characters)</li>`;
     feedbackMessage += `<li>${uppercaseValid ? '✅' : '❌'} At least one uppercase letter</li>`;
     feedbackMessage += `<li>${lowercaseValid ? '✅' : '❌'} At least one lowercase letter</li>`;
@@ -189,9 +182,11 @@ function validatePasswordOnInput() {
 
     // Check if passwords match
     if (confirmPassword.length > 0) {
-        confirmFeedback.textContent = password === confirmPassword ? '✅ Passwords match' : '❌ Passwords do not match';
+        confirmFeedback.innerHTML = password === confirmPassword
+            ? '<span style="color: green;">✅ Passwords match</span>'
+            : '<span style="color: red;">❌ Passwords do not match</span>';
     } else {
-        confirmFeedback.textContent = '';
+        confirmFeedback.innerHTML = '';
     }
 }
 
@@ -211,73 +206,27 @@ function showSliderValue(value) {
     }
 }
 
-// Function to validate all fields and toggle the submit button visibility
+// Validate all fields and toggle submit button
 function validateAllFields() {
     let isValid = true;
-    
-    // Run validation functions for each field
-    isValid = validateName() && isValid;
-    isValid = validateMiddleInitial() && isValid;
-    isValid = validateLastName() && isValid;
-    isValid = validateDOB() && isValid;
-    isValid = formatAndValidateSSN() && isValid;
-    isValid = validateAddress() && isValid;
-    isValid = validateCity() && isValid;
-    isValid = validateState() && isValid;
-    isValid = validateZip() && isValid;
-    isValid = validateEmail() && isValid;
-    isValid = validateUsername() && isValid;
 
-    // Toggle submit button visibility based on form validity
-    document.getElementById("submitButton").style.display = isValid ? "inline" : "none";
-    return isValid;
+    isValid &= validateName();
+    isValid &= validateMiddleInitial();
+    isValid &= validateLastName();
+    isValid &= validateDOB();
+    isValid &= formatAndValidateSSN();
+    isValid &= validateAddress();
+    isValid &= validateAddress2();
+    isValid &= validateCity();
+    isValid &= validateState();
+    isValid &= validateZip();
+    isValid &= validateEmail();
+    isValid &= validateUsername();
+
+    document.getElementById('submitButton').style.display = isValid ? 'inline' : 'none';
+    return Boolean(isValid);
 }
 
 function submitForm() {
-    window.location.replace("./Thankyou.html")
-}
-
-function foot() {
-    window.location.replace("./redirectblood.html")
-}
-
-
-function reviewForm() {
-    const form = document.forms['userForm'];
-
-    //getting form values for review section
-    let firstName = form['fname'].value;
-    let middleInitial = form['mname'].value;
-    let lastName = form['lname'].value;
-    let dob = form['DOB'].value;
-    let email = form['email'].value;
-    let address = form['Address'].value;
-    let city = form['City'].value;
-    let state = form['State'].value;
-    let zip = form['Zip'].value;
-    let username = form['Username'].value;
-    let bloodType = form.querySelector('input[name="Blood"]:checked')?.value || 'Not provided';
-    let insurance = form.querySelector('input[name="Insurance"]:checked')?.value === '1' ? 'Yes' : 'No';
-    username = username.toLowerCase(username);
-    let symptoms = [];
-    if (form['symptom1'].checked) symptoms.push('Chicken Pox');
-    if (form['symptom2'].checked) symptoms.push('Covid');
-    if (form['symptom3'].checked) symptoms.push('Measles');
-
-    //displaying review section of the form
-    let reviewContent = `
-        <strong>First Name:</strong> ${firstName}<br>
-        <strong>Middle Initial:</strong> ${middleInitial || 'Not provided'}<br>
-        <strong>Last Name:</strong> ${lastName}<br>
-        <strong>Date of Birth:</strong> ${dob}<br>
-        <strong>Email:</strong> ${email}<br>
-        <strong>Address:</strong> ${address}, ${city}, ${state}, ${zip}<br>
-        <strong>Blood Type:</strong> ${bloodType}<br>
-        <strong>Insurance:</strong> ${insurance}<br>
-        <strong>Symptoms:</strong> ${symptoms.length > 0 ? symptoms.join(', ') : 'None'}<br>
-        <strong>Username:</strong> ${username}<br>
-    `;
-
-    document.getElementById('reviewContent').innerHTML = reviewContent;
-    document.getElementById('reviewSection').style.display = 'block';
+    alert('Form submitted successfully!');
 }
