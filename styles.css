@@ -6,42 +6,63 @@ Date last edited: 11/2/24
 Version: 1.7
 Description: Homework 3 medical form css */
 
- body {
+body {
   background-color: rgb(58, 190, 207);
   color: black;
-    font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
 h2 {
   color: darkblue;
   font-family: 'Times New Roman', Times, serif;
   font-style: italic;
 }
+
 p {
   color: red;
   font-family: Impact, Haettenschweiler, 'Arial Bold', sans-serif;
   font-style: italic;
   font-size: x-large;
 }
-footer{
+
+footer {
   font-family: Impact, Haettenschweiler, 'Arial Bold', sans-serif;
   font-size: x-large;
 }
-span{
+
+span {
   color: red;
   font-size: large;
   font-weight: bold;
   font-style: italic;
 }
+
 .validation-feedback {
-    width: 250px;
-    font-size: 0.9em;
-    color: #555;
-    line-height: 1.5;
-    margin-left: 10px;
-    border-left: 2px solid #ddd;
-    padding-left: 10px;
-    display: inline-block;
-    vertical-align: top;
-    min-height: 60px; /* Prevent layout shifts */
+  width: 250px;
+  font-size: 0.9em;
+  color: #555;
+  line-height: 1.5;
+  margin-left: 10px;
+  border-left: 2px solid #ddd;
+  padding-left: 10px;
+  display: inline-block;
+  vertical-align: top;
+  min-height: 60px; /* Prevent layout shifts */
 }
 
+.fixed-header, .fixed-footer {
+  position: fixed;
+  background: rgb(58, 190, 207);
+  width: 100%;
+  left: 0;
+  padding: 10px;
+  box-shadow: 0 2px 2px -2px gray;
+}
+
+.fixed-header {
+  top: 0;
+}
+
+.fixed-footer {
+  bottom: 0;
+}
