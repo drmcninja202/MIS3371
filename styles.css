@@ -32,3 +32,16 @@ span{
   font-weight: bold;
   font-style: italic;
 }
+.validation-feedback {
+    width: 250px;
+    font-size: 0.9em;
+    color: #555;
+    line-height: 1.5;
+    margin-left: 10px;
+    border-left: 2px solid #ddd;
+    padding-left: 10px;
+    display: inline-block;
+    vertical-align: top;
+    min-height: 60px; /* Prevent layout shifts */
+}
+
