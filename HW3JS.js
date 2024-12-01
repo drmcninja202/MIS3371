@@ -8,6 +8,21 @@ function clearError(fieldId) {
     document.getElementById(`${fieldId}Error`).textContent = '';
 }
 
+function submitForm() {
+    const firstName = document.getElementById("fname").value;
+    if (document.getElementById("rememberMe").checked) {
+        document.cookie = `firstName=${firstName}; max-age=172800; path=/`; // 48 hours
+    } else {
+        deleteCookie("firstName");
+    }
+    alert('Form submitted successfully!');
+    window.location.href = './Thankyou.html';
+}
+
+function deleteCookie(name) {
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
 // Name validation (1-30 characters, letters, apostrophes, dashes only)
 function validateName() {
     const name = document.getElementById('fname').value;
@@ -155,6 +170,21 @@ function validateUsername() {
     return valid;
 }
 
+// Function to display slider value and show error if pain level is above 0
+function showSliderValue(value) {
+    const sliderDisplay = document.getElementById('sliderValueDisplay');
+    const painError = document.getElementById('painError');
+    sliderDisplay.textContent = value;
+
+    if (value > 0) {
+        painError.textContent = 'You should not give blood if you are in pain.';
+        return true;
+    } else {
+        painError.textContent = 'I\'m glad you are feeling well today!';
+        return false;
+    }
+}
+
 function validatePasswordOnInput() {
     const password = document.getElementById('Password').value;
     const confirmPassword = document.getElementById('ConfirmPassword').value;
@@ -190,22 +220,6 @@ function validatePasswordOnInput() {
     }
 }
 
-
-// Function to display slider value and show error if pain level is above 0
-function showSliderValue(value) {
-    const sliderDisplay = document.getElementById('sliderValueDisplay');
-    const painError = document.getElementById('painError');
-    sliderDisplay.textContent = value;
-
-    if (value > 0) {
-        painError.textContent = 'You should not give blood if you are in pain.';
-        return true;
-    } else {
-        painError.textContent = 'I\'m glad you are feeling well today!';
-        return false;
-    }
-}
-
 // Validate all fields and toggle submit button
 function validateAllFields() {
     let isValid = true;
@@ -225,8 +239,4 @@ function validateAllFields() {
 
     document.getElementById('submitButton').style.display = isValid ? 'inline' : 'none';
     return Boolean(isValid);
-}
-
-function submitForm() {
-    alert('Form submitted successfully!');
 }
